@@ -1,28 +1,22 @@
-import logo from '../logo.svg';
 import '../App.css';
 import React, { useEffect, useState } from 'react';
+import Header from './Header';
+import DrinksContainer from './DrinksContainer';
 
 function App() {
   const [drinks, setDrinks] = useState([])
 
   useEffect(() => {
-    (async () => {
-      const res = await fetch('http://localhost:3000/drinks');
-      const jsonData = await res.json();
-      setDrinks(jsonData)
-    })();
+    fetch('http://localhost:3000/drinks')
+    .then(res => res.json())
+    .then(data => setDrinks(data))
   }, [])
 
-  if (drinks.length !== 0) {
-    for (let [key, value] of Object.entries(drinks[0])) {
-      if (key.startsWith('strIngredient') && value !== null) {
-        console.log(key)
-      }
-    }
-  }
+  console.log(drinks)
   return (
     <div className="App">
-      
+      <Header />
+      <DrinksContainer drinks={drinks}/>
     </div>
   );
 }
