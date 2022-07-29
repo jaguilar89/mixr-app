@@ -7,16 +7,7 @@ import About from './About';
 import Contact from './Contact';
 import DrinkInfo from './DrinkInfo';
 
-function App() {
-  const [drinks, setDrinks] = useState([])
-
-  useEffect(() => {
-    fetch('http://localhost:3000/drinks')
-    .then(res => res.json())
-    .then(data => setDrinks(data))
-  }, [])
-
-
+export default function App() {
   return (
     <div className="App">
       <Header />
@@ -36,19 +27,4 @@ function App() {
   );
 }
 
-export default App;
 
-{/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}

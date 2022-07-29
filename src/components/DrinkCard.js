@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import DrinkInfo from "./DrinkInfo";
 
 export default function DrinkCard({ drinkInfo }) {
     return (
@@ -9,7 +8,12 @@ export default function DrinkCard({ drinkInfo }) {
                 <img src={drinkInfo.strDrinkThumb} />
             </div>
             <p className="drink-card-name">{drinkInfo.strDrink}</p>
-            <Link to="/drinkinfo">View More</Link>
+            <Link to={{
+                pathname: "/drinkinfo",
+                state: drinkInfo
+            }}>
+                View More
+            </Link>
         </div>
     )
 }
