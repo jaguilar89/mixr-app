@@ -9,7 +9,7 @@ export default function DrinkCard({ drinkInfo }) {
             </div>
             <p className="drink-card-name">{drinkInfo.strDrink}</p>
             <Link to={{
-                pathname: "/drinkinfo",
+                pathname: `/drinkinfo/${drinkInfo.idDrink}`,
                 state: drinkInfo
             }}>
                 View More

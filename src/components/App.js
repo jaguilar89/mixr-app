@@ -1,5 +1,5 @@
 import '../App.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
@@ -17,7 +17,7 @@ export default function App() {
       <Route exact path="/contact">
         <Contact />
       </Route>
-      <Route exact path="/drinkinfo">
+      <Route exact path="/drinkinfo/:id">
         <DrinkInfo />
       </Route>
       <Route exact path="/">
