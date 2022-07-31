@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 export default function DrinkCard({ drinkInfo }) {
     return (
@@ -12,7 +13,7 @@ export default function DrinkCard({ drinkInfo }) {
                 pathname: `/drinkinfo/${drinkInfo.idDrink}`,
                 state: drinkInfo
             }}>
-                View More
+                <Button variant='contained'>View More</Button>
             </Link>
         </div>
     )
