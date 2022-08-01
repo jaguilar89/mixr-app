@@ -1,31 +1,31 @@
-import { Button, FormControl, FormLabel, FormControlLabel, Radio, RadioGroup } from "@mui/material";
-import { ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 import React from "react";
 
-export default function Filter() {
+export default function Filter({ onCategoryChange, onAlcoholSelect }) {
     return (
         <>
             <label>Filter: </label>
             <ButtonGroup
                 variant="outlined"
                 aria-label="outlined button group"
-                onClick={(e) => console.log(e.target.value)}
+                onClick={onCategoryChange}
             >
-                <Button value="ordinary drink">Ordinary Drink</Button>
-                <Button value="cocktail">Cocktail</Button>
-                <Button value="shot">Shot</Button>
-                <Button value="coffee / tea">Coffee / Tea</Button>
-                <Button value="punch / party drink">Punch / Party Drink</Button>
+                <Button value="Ordinary Drink">Ordinary Drink</Button>
+                <Button value="Cocktail">Cocktail</Button>
+                <Button value="Shot">Shot</Button>
+                <Button value="Coffee / Tea">Coffee / Tea</Button>
+                <Button value="Punch / Party Drink">Punch / Party Drink</Button>
             </ButtonGroup>
             <FormControl>
                 <RadioGroup
                     row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    aria-labelledby="row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     defaultValue="alcoholic"
+                    onChange={onAlcoholSelect}
                 >
-                    <FormControlLabel value="alcoholic" control={<Radio />} label="Alcoholic" />
-                    <FormControlLabel value="non-alcoholic" control={<Radio />} label="Non-Alcoholic" />
+                    <FormControlLabel value="Alcoholic" control={<Radio />} label="Alcoholic" />
+                    <FormControlLabel value="Non alcoholic" control={<Radio />} label="Non-Alcoholic" />
                 </RadioGroup>
             </FormControl>
         </>
