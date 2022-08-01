@@ -17,7 +17,7 @@ export default function DrinkInfo() {
     };
     
     //How is this working?! this is properly creating <li> elements, but how?? retuns nested array with undefined elements
-    const mixingInstructions = measurements.map((measurement, index1) => 
+    const mixingDetails = measurements.map((measurement, index1) => 
                                 ingredients.map((ingredient, index2) => {
                                     if (index1 === index2) {
                                         return <li key={ingredient}>{measurement} of {ingredient}</li>
@@ -30,7 +30,7 @@ export default function DrinkInfo() {
             <h1>{drinkInfo.strDrink}</h1>
             <img src={drinkInfo.strDrinkThumb} alt="drink image" />
             <ul>
-                {mixingInstructions} 
+                {mixingDetails} 
             </ul>
         </div>
     )
