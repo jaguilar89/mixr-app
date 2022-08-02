@@ -2,7 +2,8 @@
   text-align: center;
   min-height: 100vh;
   color: #000;
-  background: #f5f5f5; /*#010B5D*/
+  background: #f5f5f5;
+  /*#010B5D*/
   font-family: 'Oswald', sans-serif;
   letter-spacing: 0.031rem;
 }
@@ -10,6 +11,8 @@
 .drinks-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  justify-items: center;
 }
 
 .drink-card {
@@ -24,6 +27,30 @@
   width: 15.625rem;
 }
 
+.drinkinfo-parent {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0;
+}
+
+.drinkinfo h1 {
+  text-align: center;
+}
+
+.drinkinfo-img {
+  width: 80%
+}
+
+.drinkinfo-img img {
+  height: 31.25rem;
+  width: 31.25rem;
+}
+
+.drinkinfo-instructions {
+  text-align: left;
+}
+
 a {
   text-decoration: none;
 }
+
