@@ -38,7 +38,8 @@
 }
 
 .drinkinfo-img {
-  width: 80%
+  width: 80%;
+  border-right: 1px solid black;
 }
 
 .drinkinfo-img img {
