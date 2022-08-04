@@ -9,6 +9,7 @@ export default function Home() {
     const [filterCategory, setFilterCategory] = useState("Ordinary Drink");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
     const [search, setSearch] = useState('');
+    const [ingredient, setIngredient] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -21,6 +22,10 @@ export default function Home() {
     function handleSearch(e) {
         setSearch(e.target.value)
     };
+    
+    function handleIngredientSearch(e) {
+        setIngredient(e.target.value)
+    };
 
     function handleCategoryChange(e) {
         setFilterCategory(e.target.value)
@@ -30,8 +35,16 @@ export default function Home() {
         setDrinkType(e.target.value)
     };
 
-    const drinksDisplay = drinks.filter((drink) => drink.strCategory.includes(filterCategory))
+    function ingredientSearch(drink) {
+        const searchTerm = ingredient
+        const regex = new RegExp(searchTerm, 'gi')
+        return Object.values(drink)
+                     .some((value) => regex.test(value))
+    };
+    
+    const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory)) // TODO: implement pagination, maybe.
                                 .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
+                                .filter(ingredientSearch)
                                 .filter((drink) => Object.values(drink).includes(drinkType))
                                 .map((drink) => <DrinkCard key={drink.idDrink} drinkInfo={drink} />)
 
@@ -39,6 +52,8 @@ export default function Home() {
         <>
             <Search 
                 search={search}
+                ingredient={ingredient}
+                onIngredSearch={handleIngredientSearch}
                 onSearch={handleSearch}/>
             <br />
             <Filter 
