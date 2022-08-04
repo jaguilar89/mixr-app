@@ -2,14 +2,16 @@ import { Button, ButtonGroup, FormControl, FormControlLabel, Radio, RadioGroup }
 import React from "react";
 
 export default function Filter({ onCategoryChange, onAlcoholSelect }) {
+    // TODO: Set focus on category buttons
     return (
         <>
-            <label>Filter: </label>
+            <label>Drink Category: </label>
             <ButtonGroup
                 variant="outlined"
                 aria-label="outlined button group"
                 onClick={onCategoryChange}
             >
+                <Button value="All">All</Button>
                 <Button value="Ordinary Drink">Ordinary Drink</Button>
                 <Button value="Cocktail">Cocktail</Button>
                 <Button value="Shot">Shot</Button>
