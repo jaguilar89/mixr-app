@@ -11,12 +11,36 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
                 aria-label="outlined button group"
                 onClick={onCategoryChange}
             >
-                <Button value="All">All</Button>
-                <Button value="Ordinary Drink">Ordinary Drink</Button>
-                <Button value="Cocktail">Cocktail</Button>
-                <Button value="Shot">Shot</Button>
-                <Button value="Coffee / Tea">Coffee / Tea</Button>
-                <Button value="Punch / Party Drink">Punch / Party Drink</Button>
+                <Button 
+                    value="All" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        All
+                </Button>
+                <Button 
+                    value="Ordinary Drink" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        Ordinary Drink
+                </Button>
+                <Button 
+                    value="Cocktail" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        Cocktail
+                </Button>
+                <Button 
+                    value="Shot" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        Shot
+                </Button>
+                <Button 
+                    value="Coffee / Tea" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        Coffee / Tea
+                </Button>
+                <Button 
+                    value="Punch / Party Drink" 
+                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                        Punch / Party Drink
+                </Button>
             </ButtonGroup>
             <FormControl>
                 <RadioGroup
