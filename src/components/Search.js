@@ -10,7 +10,10 @@ export default function Search({ search, onSearch, ingredient, onIngredSearch })
             value={search} 
             variant="standard"
             onChange={onSearch}
-            sx={{paddingRight: "3rem"}}
+            sx={{
+                paddingRight: "3rem",
+                width: "20rem"
+            }}
         />
         <TextField 
             id="search-input" 
@@ -18,6 +21,9 @@ export default function Search({ search, onSearch, ingredient, onIngredSearch })
             value={ingredient} 
             variant="standard"
             onChange={onIngredSearch}
+            sx={{
+                width: "20rem"
+            }}
         />
         </>
         
