@@ -6,7 +6,7 @@ import Filter from "./Filter";
 
 export default function Home() {
     const [drinks, setDrinks] = useState([]);
-    const [filterCategory, setFilterCategory] = useState("Ordinary Drink");
+    const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
     const [search, setSearch] = useState('');
     const [ingredient, setIngredient] = useState('');
