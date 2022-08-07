@@ -1,33 +1,52 @@
-import React, { useState } from "react";
-import { Alert, Box, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import React, { useRef, useState } from "react";
+import { Alert, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 export default function AddDrinkForm() {
-    const [input, setInput] = useState([])
+    const form = {
+        strDrink: "",
+        strCategory: "",
+        strAlcoholic: "",
+        strInstructions: "",
+        strDrinkThumb: "",
+        strInstructions:"",
+        strIngredient1: "",
+        strMeasure1: ""
+    };
+    const [input, setInput] = useState([]);
+    const [formData, setFormData] = useState(form);
+    const inputValue = useRef(2);
 
     function addInput() {
         setInput([
             ...input,
-            <TextField
+            [<TextField
+                key={(e) => e.target.value}
                 variant="standard"
                 label="Ingredient"
-                margin="normal"
+                name={`strIngredient${inputValue.current}`}
+                margin="dense"
+                onChange={handleChange}
                 sx={{ paddingRight: '1rem' }}
             />,
             <TextField
+                key={(e) => e.target.value}
                 variant="standard"
                 label="Measurement"
-                margin="normal"
+                name={`strMeasure${inputValue.current}`}
+                margin="dense"
+                onChange={handleChange}
             />,
-            <br />
+            <br />]
         ])
+        inputValue.current++
     };
-    
-    function alert() {
-        if (input.length <= 43) {
-            return {display: "none"}
-        }
-        return {display: "block"}
-    };
+
+    function handleChange(e) {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <form onSubmit={() => console.log('submitted')}>
@@ -36,13 +55,18 @@ export default function AddDrinkForm() {
                 required
                 variant="standard"
                 label="Drink Name"
-                margin="normal"
+                name="strDrink"
+                margin="dense"
+                onChange={handleChange}
             />
             <br />
             <InputLabel required>Drink Category</InputLabel>
             <Select
+                required
                 label="Drink Category"
-                margin="normal"
+                name="strCategory"
+                margin="dense"
+                onChange={handleChange}
                 sx={{ width: "10.438rem" }}                                       // TODO: Fix form page, set up POST request
             >
                 <MenuItem value="Ordinary Drink">Ordinary Drink</MenuItem>
@@ -54,9 +78,12 @@ export default function AddDrinkForm() {
 
             <InputLabel required>Drink Type</InputLabel>
             <Select
+                required
                 label="Drink Type"
-                margin="normal"
-                sx={{ width: "10.438rem" }}                                       // TODO: Fix form page, set up POST request
+                name="strAlcoholic"
+                margin="dense"
+                onChange={handleChange}
+                sx={{ width: "10.438rem" }}                                       
             >
                 <MenuItem value="Alcoholic">Alcoholic</MenuItem>
                 <MenuItem value="Non alcoholic">Non-Alcoholic</MenuItem>
@@ -66,22 +93,23 @@ export default function AddDrinkForm() {
                 required
                 variant="standard"
                 label="Ingredient"
-                margin="normal"
+                name="strIngredient1"
+                margin="dense"
+                onChange={handleChange}
                 sx={{ paddingRight: '1rem' }}
             />
             <TextField
                 required
                 variant="standard"
                 label="Measurement"
-                margin="normal"
+                name="strMeasure1"
+                margin="dense"
+                onChange={handleChange}
             />
             <br />
-            {(() => {
-                if (input.length < 43) {
-                    return input
-                }
-            })()}
-            <Alert severity="error" sx={alert}>Max number of ingredients added.</Alert>
+
+            {input.length < 10 ? input : <Alert severity="error">Max number of ingredients added.</Alert>}
+
             <Button 
                 variant="contained" 
                 onClick={addInput}
@@ -91,9 +119,12 @@ export default function AddDrinkForm() {
             </Button>
             <br />
             <TextField
+                required
                 multiline
-                margin="normal"
+                margin="dense"
                 label="Instructions"
+                name="strInstructions"
+                onChange={handleChange}
                 sx={{width: "50%"}}
             />
             <br />
