@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
-import Contact from './Contact';
+import AddDrink from './AddDrink';
 import DrinkInfo from './DrinkInfo';
 
 export default function App() {
@@ -14,8 +14,8 @@ export default function App() {
       <Route exact path="/about">
         <About />
       </Route>
-      <Route exact path="/contact">
-        <Contact />
+      <Route exact path="/addadrink">
+        <AddDrink />
       </Route>
       <Route exact path="/drinkinfo/:id">
         <DrinkInfo />
