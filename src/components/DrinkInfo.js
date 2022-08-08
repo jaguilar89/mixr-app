@@ -1,5 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { Chip, Stack } from "@mui/material";
 
 export default function DrinkInfo() {
     const location = useLocation();
@@ -33,7 +34,12 @@ export default function DrinkInfo() {
                     <img src={drinkInfo.strDrinkThumb} alt="drink image" />
                 </div>
                 <div className="drinkinfo-instructions">
-                <h2>Ingredients</h2>
+                    <Stack direction="row" spacing={1}>
+                        <Chip label={drinkInfo.strCategory} />
+                        <Chip label={drinkInfo.strAlcoholic} />
+                        <Chip label={drinkInfo.strGlass} />
+                    </Stack>
+                    <h2>Ingredients</h2>
                     <ul>
                         {mixingDetails}
                     </ul>
