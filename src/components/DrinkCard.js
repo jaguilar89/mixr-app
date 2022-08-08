@@ -8,7 +8,7 @@ export default function DrinkCard({ drinkInfo }) {
             <div className="drink-thumb">
                 <img src={drinkInfo.strDrinkThumb} alt="drink thumbnail" />
             </div>
-            <p className="drink-card-name">{drinkInfo.strDrink}</p>
+            <p className="drink-card-name"><strong>{drinkInfo.strDrink}</strong></p>
             <Link to={{
                 pathname: `/drinkinfo/${drinkInfo.idDrink}`,
                 state: drinkInfo
