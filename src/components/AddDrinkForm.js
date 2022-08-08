@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import uuid from "react-uuid";
 import { Alert, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 export default function AddDrinkForm() {
@@ -20,16 +21,15 @@ export default function AddDrinkForm() {
         setInput([
             ...input,
             [<TextField
-                key={(e) => e.target.value}
+                key={uuid()}
                 variant="standard"
                 label="Ingredient"
                 name={`strIngredient${inputValue.current}`}
                 margin="dense"
                 onChange={handleChange}
-                sx={{ paddingRight: '1rem' }}
             />,
             <TextField
-                key={(e) => e.target.value}
+                key={uuid()}
                 variant="standard"
                 label="Measurement"
                 name={`strMeasure${inputValue.current}`}
@@ -47,7 +47,7 @@ export default function AddDrinkForm() {
             [e.target.name]: e.target.value
         })
     }
-
+console.log(formData)
     return (
         <form onSubmit={() => console.log('submitted')}>
 
