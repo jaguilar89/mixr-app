@@ -25,18 +25,20 @@ export default function AddDrinkForm() {
                 variant="standard"
                 label="Ingredient"
                 name={`strIngredient${inputValue.current}`} //strIngredient2, strIngredient3, etc etc
+                value={form[`strIngredient${inputValue.current}`]}
                 margin="dense"
                 onChange={handleChange}
             />,
             <TextField
                 key={uuid()}
                 variant="standard"
-                label="Measurement"
+                label="Amount"
                 name={`strMeasure${inputValue.current}`}
+                value={form[`strMeasure${inputValue.current}`]}
                 margin="dense"
                 onChange={handleChange}
             />,
-            <br />
+            <br key={uuid()}/>
         ])
         inputValue.current++
     };
@@ -47,7 +49,8 @@ export default function AddDrinkForm() {
             [e.target.name]: e.target.value
         })
     }
-console.log(formData)
+
+    console.log(formData)
     return (
         <form onSubmit={() => console.log('submitted')}>
 
@@ -100,14 +103,14 @@ console.log(formData)
             <TextField
                 required
                 variant="standard"
-                label="Measurement"
+                label="Amount"
                 name="strMeasure1"
                 margin="dense"
                 onChange={handleChange}
             />
             <br />
 
-            {input.length < 10 ? input.map((e) => e) : <Alert severity="error">Max number of ingredients added.</Alert>}
+            {input.length < 29 ? input.map((e) => e) : <Alert severity="error">Max number of ingredients added.</Alert>}
 
             <Button 
                 variant="contained" 

@@ -58,3 +58,7 @@ a {
 .hidden {
   display: none;
 }
+
+.tools {
+  list-style: none;
+}
