@@ -20,11 +20,11 @@ export default function AddDrinkForm() {
     function addInput() {
         setInput([
             ...input,
-            [<TextField
+            <TextField
                 key={uuid()}
                 variant="standard"
                 label="Ingredient"
-                name={`strIngredient${inputValue.current}`}
+                name={`strIngredient${inputValue.current}`} //strIngredient2, strIngredient3, etc etc
                 margin="dense"
                 onChange={handleChange}
             />,
@@ -36,7 +36,7 @@ export default function AddDrinkForm() {
                 margin="dense"
                 onChange={handleChange}
             />,
-            <br />]
+            <br />
         ])
         inputValue.current++
     };
@@ -96,7 +96,6 @@ console.log(formData)
                 name="strIngredient1"
                 margin="dense"
                 onChange={handleChange}
-                sx={{ paddingRight: '1rem' }}
             />
             <TextField
                 required
@@ -108,7 +107,7 @@ console.log(formData)
             />
             <br />
 
-            {input.length < 10 ? input : <Alert severity="error">Max number of ingredients added.</Alert>}
+            {input.length < 10 ? input.map((e) => e) : <Alert severity="error">Max number of ingredients added.</Alert>}
 
             <Button 
                 variant="contained" 
