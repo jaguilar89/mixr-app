@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import '../App.css';
 import DrinksContainer from './DrinksContainer';
 import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
+import AddDrink from "./AddDrinkButton";
 
 export default function Home() {
     const [drinks, setDrinks] = useState([]);
@@ -60,6 +62,8 @@ export default function Home() {
                 onCategoryChange={handleCategoryChange}
                 onAlcoholSelect={handleAlcoholSelect}
             />
+            <br />
+            <AddDrink />
             <DrinksContainer drinks={drinksDisplay} />
         </>
     )

@@ -2,7 +2,12 @@ import { Button, ButtonGroup, FormControl, FormControlLabel, Radio, RadioGroup }
 import React from "react";
 
 export default function Filter({ onCategoryChange, onAlcoholSelect }) {
-    // TODO: Set focus on category buttons
+    const style = {
+        "&:focus": {
+            backgroundColor: "orange"
+        }
+    }
+
     return (
         <>
             <label>Drink Category: </label>
@@ -13,32 +18,32 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
             >
                 <Button 
                     value="All" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         All
                 </Button>
                 <Button 
                     value="Ordinary Drink" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         Ordinary Drink
                 </Button>
                 <Button 
                     value="Cocktail" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         Cocktail
                 </Button>
                 <Button 
                     value="Shot" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         Shot
                 </Button>
                 <Button 
                     value="Coffee / Tea" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         Coffee / Tea
                 </Button>
                 <Button 
                     value="Punch / Party Drink" 
-                    sx={{"&:focus": {backgroundColor: "blue"}}}>
+                    sx={style}>
                         Punch / Party Drink
                 </Button>
             </ButtonGroup>

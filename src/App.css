@@ -8,6 +8,10 @@
   letter-spacing: 0.031rem;
 }
 
+.navbar a {
+  padding: 1rem;
+}
+
 .drinks-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -53,6 +57,10 @@
 
 a {
   text-decoration: none;
+}
+
+a:visited {
+  color: #000;
 }
 
 .hidden {

@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import uuid from "react-uuid";
 import { Alert, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 export default function AddDrinkForm() {
@@ -13,35 +12,9 @@ export default function AddDrinkForm() {
         strIngredient1: "",
         strMeasure1: ""
     };
-    const [input, setInput] = useState([]);
-    const [formData, setFormData] = useState(form);
-    const inputValue = useRef(2);
 
-    function addInput() {
-        setInput([
-            ...input,
-            <TextField
-                key={uuid()}
-                variant="standard"
-                label="Ingredient"
-                name={`strIngredient${inputValue.current}`} //strIngredient2, strIngredient3, etc etc
-                value={form[`strIngredient${inputValue.current}`]}
-                margin="dense"
-                onChange={handleChange}
-            />,
-            <TextField
-                key={uuid()}
-                variant="standard"
-                label="Amount"
-                name={`strMeasure${inputValue.current}`}
-                value={form[`strMeasure${inputValue.current}`]}
-                margin="dense"
-                onChange={handleChange}
-            />,
-            <br key={uuid()}/>
-        ])
-        inputValue.current++
-    };
+    const [formData, setFormData] = useState(form);
+    const inputs = []
 
     function handleChange(e) {
         setFormData({
@@ -50,6 +23,25 @@ export default function AddDrinkForm() {
         })
     }
 
+    for (let i = 2; i <= 10; i++) {
+        inputs.push([<TextField
+            key={i}
+            variant="standard"
+            label="Ingredient"
+            name={`strIngredient${i}`}
+            margin="dense"
+            onChange={handleChange}
+        />,
+        <TextField
+            key={i}
+            variant="standard"
+            label="Amount"
+            name={`strMeasure${i}`}
+            margin="dense"
+            onChange={handleChange}
+        />,
+        <br />])
+    }
     console.log(formData)
     return (
         <form onSubmit={() => console.log('submitted')}>
@@ -109,17 +101,7 @@ export default function AddDrinkForm() {
                 onChange={handleChange}
             />
             <br />
-
-            {input.length < 29 ? input.map((e) => e) : <Alert severity="error">Max number of ingredients added.</Alert>}
-
-            <Button 
-                variant="contained" 
-                onClick={addInput}
-                sx={{marginTop: "1rem"}}
-                >
-                    Add Ingredient
-            </Button>
-            <br />
+            {inputs}
             <TextField
                 required
                 multiline
@@ -134,21 +116,3 @@ export default function AddDrinkForm() {
         </form>
     )
 }
-
-/*
-const textFields = [];
-
-    for (let i = 0; textFields.length < 42; i++) {
-        textFields.push(<TextField
-            variant="standard"
-            label="Ingredient"
-            sx={{ paddingRight: '1rem' }}
-        />,
-            <TextField
-                variant="standard"
-                label="Measure"
-            />,
-            <br />)
-        i++
-    }
-*/

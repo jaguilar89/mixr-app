@@ -4,20 +4,18 @@ import { Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
-import AddDrink from './AddDrink';
+import AddDrink from './AddDrinkButton';
 import DrinkInfo from './DrinkInfo';
 
 export default function App() {
+
   return (
     <div className="App">
       <Header />
       <Route exact path="/about">
         <About />
       </Route>
-      <Route exact path="/addadrink">
-        <AddDrink />
-      </Route>
-      <Route exact path="/drinkinfo/:id">
+      <Route path="/drinkinfo/:name">
         <DrinkInfo />
       </Route>
       <Route exact path="/">
