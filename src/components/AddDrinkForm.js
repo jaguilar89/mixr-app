@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { Alert, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { useHistory } from "react-router-dom";
 
 export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
     const form = {
@@ -19,8 +18,8 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
     };
 
     const [formData, setFormData] = useState(form);
+    const [submitted, setSubmitted] = useState(false);
     const inputs = []
-    const history = useHistory();
 
     function handleChange(e) {
         e.preventDefault();
@@ -40,12 +39,16 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
                 },
                 body: JSON.stringify(formData)
             })
+            if (res.ok) {
+                setSubmitted(true)
+            }
 
             const newDrink = await res.json()
             onSubmitForm(newDrink)
         } catch(err) {
             console.log(err)
         }
+        e.target.reset();
     }
 
     //Dynamically generate ingredient/amount input fields
@@ -169,6 +172,7 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
             />
             <br />
             </DialogContent>
+            {submitted ? <Alert severity="success">Drink successfully submitted! You may close this window.</Alert> : null}
             <DialogActions>
                 <Button variant="contained" onClick={onButtonClick}>Close</Button>
                 <Button variant="contained" type="submit">Submit</Button>
