@@ -1,28 +1,54 @@
-import React, { useRef, useState } from "react";
-import { Alert, Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import React, { useState } from "react";
+import { Button, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import { useHistory } from "react-router-dom";
 
-export default function AddDrinkForm() {
+export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
     const form = {
         strDrink: "",
         strCategory: "",
         strAlcoholic: "",
         strInstructions: "",
         strDrinkThumb: "",
-        strInstructions:"",
         strIngredient1: "",
         strMeasure1: ""
     };
 
     const [formData, setFormData] = useState(form);
     const inputs = []
+    const history = useHistory();
 
     function handleChange(e) {
+        e.preventDefault();
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
         })
     }
 
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try { 
+            const res = await fetch("http://localhost:3000/drinks", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const newDrink = await res.json()
+            onSubmitForm(newDrink)
+        } catch(err) {
+            console.log(err)
+        }
+    }
+
+    //Dynamically generate ingredient/amount input fields
     for (let i = 2; i <= 10; i++) {
         inputs.push([<TextField
             key={i}
@@ -33,18 +59,26 @@ export default function AddDrinkForm() {
             onChange={handleChange}
         />,
         <TextField
-            key={i}
+            key={i + 1}
             variant="standard"
             label="Amount"
             name={`strMeasure${i}`}
             margin="dense"
             onChange={handleChange}
         />,
-        <br />])
-    }
-    console.log(formData)
+        <br key={i + 10}/>])
+    } 
+
     return (
-        <form onSubmit={() => console.log('submitted')}>
+        <Dialog open={true} onClose={onButtonClick}>
+
+        <form method="POST" onSubmit={handleSubmit}>
+
+        <DialogTitle>Add a New Drink</DialogTitle>
+        <DialogContent>
+            <DialogContentText>
+                Add your own drink here. Once submitted, you may search for it by name/ingredient on the main page.
+            </DialogContentText>
 
             <TextField
                 required
@@ -53,6 +87,17 @@ export default function AddDrinkForm() {
                 name="strDrink"
                 margin="dense"
                 onChange={handleChange}
+                fullWidth
+            />
+            <br />
+            <TextField
+                required
+                variant="standard"
+                label="Image URL"
+                name="strDrinkThumb"
+                margin="dense"
+                onChange={handleChange}
+                fullWidth
             />
             <br />
             <InputLabel required>Drink Category</InputLabel>
@@ -62,7 +107,7 @@ export default function AddDrinkForm() {
                 name="strCategory"
                 margin="dense"
                 onChange={handleChange}
-                sx={{ width: "10.438rem" }}                                       // TODO: Fix form page, set up POST request
+                fullWidth                                       // TODO: Fix form page, set up POST request
             >
                 <MenuItem value="Ordinary Drink">Ordinary Drink</MenuItem>
                 <MenuItem value="Cocktail">Cocktail</MenuItem>
@@ -78,11 +123,20 @@ export default function AddDrinkForm() {
                 name="strAlcoholic"
                 margin="dense"
                 onChange={handleChange}
-                sx={{ width: "10.438rem" }}                                       
+                fullWidth                                       
             >
                 <MenuItem value="Alcoholic">Alcoholic</MenuItem>
                 <MenuItem value="Non alcoholic">Non-Alcoholic</MenuItem>
             </Select>
+            <br />
+            <TextField
+                variant="standard"
+                label="Container (shot glass, cocktail glass, etc)"
+                name="strGlass"
+                margin="dense"
+                onChange={handleChange}
+                fullWidth
+            />
             <br />
             <TextField
                 required
@@ -101,7 +155,9 @@ export default function AddDrinkForm() {
                 onChange={handleChange}
             />
             <br />
-            {inputs}
+
+            {inputs} 
+
             <TextField
                 required
                 multiline
@@ -109,10 +165,15 @@ export default function AddDrinkForm() {
                 label="Instructions"
                 name="strInstructions"
                 onChange={handleChange}
-                sx={{width: "50%"}}
+                fullWidth
             />
             <br />
-            <Button variant="contained" type="submit">Submit</Button>
+            </DialogContent>
+            <DialogActions>
+                <Button variant="contained" onClick={onButtonClick}>Close</Button>
+                <Button variant="contained" type="submit">Submit</Button>
+            </DialogActions>
         </form>
+        </Dialog>
     )
 }

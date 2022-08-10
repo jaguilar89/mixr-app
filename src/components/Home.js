@@ -4,14 +4,16 @@ import DrinksContainer from './DrinksContainer';
 import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
-import AddDrink from "./AddDrinkButton";
+import { Button } from "@mui/material";
+import AddDrinkForm from "./AddDrinkForm";
 
 export default function Home() {
     const [drinks, setDrinks] = useState([]);
     const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
-    const [search, setSearch] = useState('');
-    const [ingredient, setIngredient] = useState('');
+    const [search, setSearch] = useState("");
+    const [ingredient, setIngredient] = useState("");
+    const [formIsShown, setFormIsShown] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -43,7 +45,15 @@ export default function Home() {
         return Object.values(drink)
                      .some((value) => regex.test(value))
     };
-    
+
+    function handleShowForm() {
+        setFormIsShown((formIsShown) => !formIsShown)
+    };
+
+    function handleAddDrink(newDrink) {
+        setDrinks([...drinks, newDrink])
+    }
+
     const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory)) // TODO: implement pagination, maybe.
                                 .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
                                 .filter(ingredientSearch)
@@ -63,7 +73,14 @@ export default function Home() {
                 onAlcoholSelect={handleAlcoholSelect}
             />
             <br />
-            <AddDrink />
+            
+            <Button 
+                variant="contained"
+                onClick={handleShowForm}
+            >
+                Add a new drink
+            </Button>
+            {formIsShown && <AddDrinkForm onButtonClick={handleShowForm} onSubmitForm={handleAddDrink}/>}
             <DrinksContainer drinks={drinksDisplay} />
         </>
     )

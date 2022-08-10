@@ -4,7 +4,6 @@ import { Route } from 'react-router-dom';
 import Header from './Header';
 import Home from './Home';
 import About from './About';
-import AddDrink from './AddDrinkButton';
 import DrinkInfo from './DrinkInfo';
 
 export default function App() {
