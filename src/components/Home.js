@@ -14,17 +14,6 @@ export default function Home() {
     const [search, setSearch] = useState("");
     const [ingredient, setIngredient] = useState("");
     const [formIsShown, setFormIsShown] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    
-    const drinksPerPage = 30;
-    const totalPages = Math.ceil(drinks.length / drinksPerPage);
-    const indexOfLastDrink = currentPage * drinksPerPage;
-    const indexOfFirstDrink = indexOfLastDrink - drinksPerPage;
-
-    function handlePageChange(e, value) {
-        console.log(value)
-        setCurrentPage(value)
-    };
 
     useEffect(() => {
         (async () => {
@@ -65,7 +54,7 @@ export default function Home() {
         setDrinks([...drinks, newDrink])
     }
 
-    const drinksDisplay = drinks.slice(indexOfFirstDrink, indexOfLastDrink)
+    const drinksDisplay = drinks
                                 .filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
                                 .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
                                 .filter(ingredientSearch)
@@ -92,28 +81,9 @@ export default function Home() {
             >
                 Add a new drink
             </Button>
-            <div className="pagination">
-                <Pagination
-                    count={totalPages}
-                    variant="outlined"
-                    shape="rounded"
-                    size="large"
-                    page={currentPage}
-                    onChange={handlePageChange}
-                />
-            </div>
+             
             {formIsShown && <AddDrinkForm onButtonClick={handleShowForm} onSubmitForm={handleAddDrink} />}
             <DrinksContainer drinks={drinksDisplay} />
-            <div className="pagination">
-            <Pagination
-                    count={totalPages}
-                    variant="outlined"
-                    shape="rounded"
-                    size="large"
-                    page={currentPage}
-                    onChange={handlePageChange}
-                />
-            </div>
         </>
     )
 };
