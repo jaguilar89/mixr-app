@@ -11,7 +11,7 @@ export default function Search({ search, onSearch, ingredient, onIngredSearch })
             variant="standard"
             onChange={onSearch}
             sx={{
-                paddingRight: "3rem",
+                padding: "1rem 3rem 1rem 0",
                 width: "20rem"
             }}
         />
@@ -22,6 +22,7 @@ export default function Search({ search, onSearch, ingredient, onIngredSearch })
             variant="standard"
             onChange={onIngredSearch}
             sx={{
+                padding: "1rem 0",
                 width: "20rem"
             }}
         />

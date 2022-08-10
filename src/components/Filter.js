@@ -15,6 +15,7 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
                 variant="outlined"
                 aria-label="outlined button group"
                 onClick={onCategoryChange}
+                sx={{padding: '1rem 0'}}
             >
                 <Button 
                     value="All" 
@@ -54,6 +55,10 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
                     name="row-radio-buttons-group"
                     defaultValue="alcoholic"
                     onChange={onAlcoholSelect}
+                    sx={{
+                        marginTop: "0.75rem",
+                        paddingLeft: "1rem"
+                    }}
                 >
                     <FormControlLabel value="Alcoholic" control={<Radio />} label="Alcoholic" />
                     <FormControlLabel value="Non alcoholic" control={<Radio />} label="Non-Alcoholic" />

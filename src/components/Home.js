@@ -4,10 +4,11 @@ import DrinksContainer from './DrinksContainer';
 import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
-import { Button, Pagination } from "@mui/material";
+import { Button, LinearProgress } from "@mui/material";
 import AddDrinkForm from "./AddDrinkForm";
 
 export default function Home() {
+    const [loading, setIsLoading] = useState(true)
     const [drinks, setDrinks] = useState([]);
     const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
@@ -20,11 +21,12 @@ export default function Home() {
             const res = await fetch('http://localhost:3000/drinks')
             const drinkData = await res.json();
             setDrinks(drinkData)
+            setIsLoading(false)
         })()
     }, [])
-
+    
     function handleSearch(e) {
-        setSearch(e.target)
+        setSearch(e.target.value)
     };
 
     function handleIngredientSearch(e) {
@@ -54,8 +56,7 @@ export default function Home() {
         setDrinks([...drinks, newDrink])
     }
 
-    const drinksDisplay = drinks
-                                .filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
+    const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
                                 .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
                                 .filter(ingredientSearch)
                                 .filter((drink) => Object.values(drink).includes(drinkType))
@@ -69,21 +70,21 @@ export default function Home() {
                 onIngredSearch={handleIngredientSearch}
                 onSearch={handleSearch} />
             <br />
-            <Filter
-                onCategoryChange={handleCategoryChange}
-                onAlcoholSelect={handleAlcoholSelect}
-            />
-            <br />
-
             <Button
                 variant="contained"
                 onClick={handleShowForm}
             >
                 Add a new drink
             </Button>
-             
             {formIsShown && <AddDrinkForm onButtonClick={handleShowForm} onSubmitForm={handleAddDrink} />}
-            <DrinksContainer drinks={drinksDisplay} />
+            <br />
+            <Filter
+                onCategoryChange={handleCategoryChange}
+                onAlcoholSelect={handleAlcoholSelect}
+            />
+            <br />
+             
+            {loading ? <LinearProgress /> : <DrinksContainer drinks={drinksDisplay} />  }
         </>
     )
 };

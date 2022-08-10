@@ -8,6 +8,14 @@
   letter-spacing: 0.031rem;
 }
 
+#heading {
+  padding-top: 1rem;
+}
+.navbar {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .navbar a {
   padding: 1rem;
 }
