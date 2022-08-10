@@ -141,6 +141,10 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
                 fullWidth
             />
             <br />
+            <br />
+            <DialogContentText>
+                Add ingredients (At least 1 ingredient/amount required)
+            </DialogContentText>
             <TextField
                 required
                 variant="standard"

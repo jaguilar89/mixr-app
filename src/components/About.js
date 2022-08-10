@@ -17,7 +17,9 @@ export default function About() {
             <br />
             <h2>Credits</h2>
             <p>
-                The dataset for this project was acquired from <a href="https://www.thecocktaildb.com/">TheCockailDB, an open and crowd-sourced database.</a>
+                The dataset for this project was acquired from TheCockailDB, an open and crowd-sourced database.
+                <br />
+                <a href="https://www.thecocktaildb.com/">https://www.thecocktaildb.com/</a>
             </p>
         </>
     )

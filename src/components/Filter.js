@@ -2,9 +2,17 @@ import { Button, ButtonGroup, FormControl, FormControlLabel, Radio, RadioGroup }
 import React from "react";
 
 export default function Filter({ onCategoryChange, onAlcoholSelect }) {
-    const style = {
+    const buttonStyle = {
+        color: "#f5f5f5",
         "&:focus": {
-            backgroundColor: "orange"
+            backgroundColor: "#BD7900"
+        }
+    };
+
+    const radioStyle = {
+        color: "#f5f5f5",
+        "&.Mui-checked": {
+            color: "#f5f5f5"
         }
     }
 
@@ -12,6 +20,7 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
         <>
             <label>Drink Category: </label>
             <ButtonGroup
+                size="large"
                 variant="outlined"
                 aria-label="outlined button group"
                 onClick={onCategoryChange}
@@ -19,32 +28,32 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
             >
                 <Button 
                     value="All" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         All
                 </Button>
                 <Button 
                     value="Ordinary Drink" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         Ordinary Drink
                 </Button>
                 <Button 
                     value="Cocktail" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         Cocktail
                 </Button>
                 <Button 
                     value="Shot" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         Shot
                 </Button>
                 <Button 
                     value="Coffee / Tea" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         Coffee / Tea
                 </Button>
                 <Button 
                     value="Punch / Party Drink" 
-                    sx={style}>
+                    sx={buttonStyle}>
                         Punch / Party Drink
                 </Button>
             </ButtonGroup>
@@ -57,11 +66,11 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
                     onChange={onAlcoholSelect}
                     sx={{
                         marginTop: "0.75rem",
-                        paddingLeft: "1rem"
+                        paddingLeft: "1rem",
                     }}
                 >
-                    <FormControlLabel value="Alcoholic" control={<Radio />} label="Alcoholic" />
-                    <FormControlLabel value="Non alcoholic" control={<Radio />} label="Non-Alcoholic" />
+                    <FormControlLabel value="Alcoholic" control={<Radio sx={radioStyle}/>} label="Alcoholic" />
+                    <FormControlLabel value="Non alcoholic" control={<Radio sx={radioStyle}/>} label="Non-Alcoholic" />
                 </RadioGroup>
             </FormControl>
         </>

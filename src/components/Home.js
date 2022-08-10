@@ -22,6 +22,7 @@ export default function Home() {
             const drinkData = await res.json();
             setDrinks(drinkData)
             setIsLoading(false)
+            document.body.style.backgroundColor = "#1b3b79" //changes body color
         })()
     }, [])
     
