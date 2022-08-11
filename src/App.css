@@ -23,7 +23,7 @@
 .navbar a {
   transition: all .2s ease-in-out;
   padding: 1rem;
-  font-size: 1.6rem;
+  font-size: 1.75rem;
 }
 
 .navbar a:hover {

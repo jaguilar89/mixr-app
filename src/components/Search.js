@@ -34,6 +34,9 @@ export default function Search({ search, onSearch, ingredient, onIngredSearch })
             onChange={onIngredSearch}
             InputLabelProps={labelStyle}
             sx={{
+                input: {
+                    color: "#f5f5f5"
+                },
                 padding: "1rem 0",
                 width: "20rem"
             }}
