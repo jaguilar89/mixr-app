@@ -7,20 +7,18 @@ export default function About() {
         <>
             <h1>About</h1>
             <p>
-                This app was created as my Phase 2 React Project for Flatiron School's Software Engineering bootcamp.
+                This is a front-end, single-page application written in React as part of my Software Engineering bootcamp at Flatiron School.
             </p>
             <ul className="tools">
-            <p>Tools used:</p>
-                <li>React</li>
-                <li>JavaScript</li>
-                <li>React Router v5</li>
-                <li>Material-UI</li>
+            <p>Other tools used:</p>
+                <li>React Router (v5)</li>
+                <li>Material UI</li>
             </ul>
             <br />
 
             <h1>Credits</h1>
             <p>
-                The dataset for this project was acquired from TheCockailDB, an open and crowd-sourced database.
+                The data set for this project was acquired from TheCockailDB, an open and crowd-sourced database.
                 <br />
                 <a href="https://www.thecocktaildb.com/">https://www.thecocktaildb.com/</a>
             </p>
@@ -34,10 +32,29 @@ export default function About() {
             <h1>Contact</h1>
             <div id="contact-info">
                 <a href="https://github.com/jaguilar89">
-                    <GitHubIcon fontSize="large" />
+                    <GitHubIcon 
+                        fontSize="large"
+                        sx={{
+                            transition: "all .2s ease-in-out",
+                            fontSize: "2.8rem",
+                            paddingRight: "1.75rem",
+                            "&:hover": {
+                                transform: "scale(1.2)"
+                            }
+                        }}
+                     />
                 </a>
                 <a href="https://www.linkedin.com/in/jaguilar89/">
-                    <LinkedInIcon fontSize="large" />
+                    <LinkedInIcon 
+                        fontSize="large" 
+                        sx={{
+                            transition: "all .2s ease-in-out",
+                            fontSize: "2.8rem",
+                            "&:hover": {
+                                transform: "scale(1.2)"
+                            }
+                        }}
+                    />
                 </a>
             </div>
         </>

@@ -9,7 +9,7 @@ export default function Header() {
                 Mixr
                <LocalBarIcon 
                 fontSize="large"
-                sx={{ 
+                sx={{
                     marginLeft: "0.70rem"
                     }}
                 />

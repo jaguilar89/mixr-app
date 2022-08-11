@@ -15,7 +15,7 @@ export default function DrinkCard({ drinkInfo }) {
                 pathname: `/drinkinfo/${strDrink}`,
                 state: drinkInfo
             }}>
-                <Button variant='contained'>View More</Button>
+                <Button variant='contained'>View Details</Button>
             </Link>
         </div>
     )
