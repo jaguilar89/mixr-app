@@ -5,7 +5,7 @@ export default function Filter({ onCategoryChange, onAlcoholSelect }) {
     const buttonStyle = {
         color: "#f5f5f5",
         "&:focus": {
-            backgroundColor: "#BD7900"
+            backgroundColor: "#1976d2"
         }
     };
 

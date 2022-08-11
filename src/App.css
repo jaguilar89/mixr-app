@@ -24,8 +24,9 @@
 .drinks-container {
   margin-top: 2rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 1.25rem;
+  row-gap: 3rem;
   grid-template-rows: auto;
   justify-items: center;
 }
@@ -34,12 +35,29 @@
   border-radius: 1.563rem;
   height: 25rem;
   width: 25rem;
+  grid-column: span 2;
+}
+
+/* Dealing with 2 leftover items in grid*/
+
+.drink-card:last-child:nth-child(3n - 1) {
+  grid-column-end: -2;
+}
+
+.drink-card:nth-last-child(2):nth-child(3n + 1) {
+  grid-column-end: 4;
+}
+
+/* Dealing with single leftover item in grid */
+
+.drink-card:last-child:nth-child(3n - 2) {
+  grid-column-end: 5;
 }
 
 .drink-thumb img {
   border-radius: 1.563rem;
-  height: 15.625rem;
-  width: 15.625rem;
+  height: 18rem;
+  width: 18rem;
 }
 
 .drinkinfo-parent {

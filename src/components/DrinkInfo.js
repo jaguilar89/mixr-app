@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Chip, Stack } from "@mui/material";
 
 export default function DrinkInfo() {
@@ -17,7 +17,6 @@ export default function DrinkInfo() {
         }
     };
 
-    //How is this working?! this is properly creating <li> elements, but how?? retuns nested array with undefined elements
     const mixingDetails = measurements.map((measurement, index1) =>
         ingredients.map((ingredient, index2) => {
             if (index1 === index2) {
@@ -35,9 +34,9 @@ export default function DrinkInfo() {
                 </div>
                 <div className="drinkinfo-instructions">
                     <Stack direction="row" spacing={1}>
-                        <Chip label={drinkInfo.strCategory} />
-                        <Chip label={drinkInfo.strAlcoholic} />
-                        <Chip label={drinkInfo.strGlass} />
+                        <Chip label={drinkInfo.strCategory} color="primary" />
+                        <Chip label={drinkInfo.strAlcoholic} color="primary"/>
+                        <Chip label={drinkInfo.strGlass} color="primary"/>
                     </Stack>
                     <h2>Ingredients</h2>
                     <ul>
