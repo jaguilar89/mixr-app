@@ -27,7 +27,7 @@ export default function DrinkInfo() {
 
     return (
         <>
-            <h1>{drinkInfo.strDrink}</h1>
+            <h1 className="drinkinfo-name">{drinkInfo.strDrink}</h1>
             <div className="drinkinfo-parent">
                 <div className="drinkinfo-img">
                     <img src={drinkInfo.strDrinkThumb} alt="drink image" />
