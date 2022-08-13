@@ -9,10 +9,10 @@ export default function DrinkCard({ drinkInfo }) {
     return (
         <div className="drink-card">
             <div className="drink-thumb">
-                {<img src={strDrinkThumb} alt="drink thumbnail" /> || <Skeleton />}
+                {strDrinkThumb ? <img src={strDrinkThumb} alt="drink thumbnail" /> : <Skeleton />}
             </div>
             <p className="drink-card-name">
-                {<strong>{strDrink}</strong> || <Skeleton />}
+                {strDrink ? <strong>{strDrink}</strong> : <Skeleton />}
             </p>
             
             <Link to={{
