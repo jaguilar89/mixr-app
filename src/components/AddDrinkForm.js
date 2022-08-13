@@ -32,7 +32,7 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
     async function handleSubmit(e) {
         e.preventDefault();
         try { 
-            const res = await fetch("http://localhost:3000/drinks", {
+            const res = await fetch("https://mixr-drink-app.herokuapp.com/drinks", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

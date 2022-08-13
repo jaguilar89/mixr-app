@@ -17,15 +17,19 @@ export default function Home() {
     const [formIsShown, setFormIsShown] = useState(false);
 
     useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:3000/drinks')
-            const drinkData = await res.json();
-            setDrinks(drinkData)
-            setIsLoading(false)
-            document.body.style.backgroundColor = "#1b3b79" //changes body color
-        })()
+        try {
+            (async () => {
+                const res = await fetch('https://mixr-drink-app.herokuapp.com/drinks')
+                const drinkData = await res.json();
+                setDrinks(drinkData)
+                setIsLoading(false)
+                document.body.style.backgroundColor = "#1b3b79" //changes body color
+            })()
+        } catch (err) {
+            console.log("There was a problem with the fetch request: " + err);
+        }
     }, [])
-    
+
     function handleSearch(e) {
         setSearch(e.target.value)
     };
@@ -58,10 +62,10 @@ export default function Home() {
     }
 
     const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
-                                .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
-                                .filter(ingredientSearch)
-                                .filter((drink) => Object.values(drink).includes(drinkType))
-                                .map((drink) => <DrinkCard key={drink.id} drinkInfo={drink} />)
+        .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
+        .filter(ingredientSearch)
+        .filter((drink) => Object.values(drink).includes(drinkType))
+        .map((drink) => <DrinkCard key={drink.id} drinkInfo={drink} />)
 
     return (
         <>
@@ -84,8 +88,8 @@ export default function Home() {
                 onAlcoholSelect={handleAlcoholSelect}
             />
             <br />
-             
-            {loading ? <LinearProgress /> : <DrinksContainer drinks={drinksDisplay} />  }
+
+            {loading ? <LinearProgress /> : <DrinksContainer drinks={drinksDisplay} />}
         </>
     )
 };
