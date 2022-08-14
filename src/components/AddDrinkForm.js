@@ -18,7 +18,7 @@ export default function AddDrinkForm({ onButtonClick, onSubmitForm }) {
     };
 
     const [formData, setFormData] = useState(form);
-    const [submitted, setSubmitted] = useState(false);
+    const [submitted, setSubmitted] = useState(false); // Display an success alert once submitted state is set to 'true'.
     const inputs = []
 
     function handleChange(e) {

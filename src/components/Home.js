@@ -12,8 +12,8 @@ export default function Home() {
     const [drinks, setDrinks] = useState([]);
     const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
-    const [search, setSearch] = useState("");
-    const [ingredient, setIngredient] = useState("");
+    const [drinkSearch, setDrinkSearch] = useState("");
+    const [ingredientSearch, setIngredientSearch] = useState("");
     const [formIsShown, setFormIsShown] = useState(false);
 
     useEffect(() => {
@@ -30,12 +30,12 @@ export default function Home() {
         }
     }, [])
 
-    function handleSearch(e) {
-        setSearch(e.target.value)
+    function handleDrinkSearch(e) {
+        setDrinkSearch(e.target.value)
     };
 
     function handleIngredientSearch(e) {
-        setIngredient(e.target.value)
+        setIngredientSearch(e.target.value)
     };
 
     function handleCategoryChange(e) {
@@ -46,11 +46,12 @@ export default function Home() {
         setDrinkType(e.target.value)
     };
 
-    function ingredientSearch(drink) {
-        const searchTerm = ingredient
+    // Search drink objects for any instance of the search term using regex
+    function handleSearchByIngredient(drink) {
+        const searchTerm = ingredientSearch
         const regex = new RegExp(searchTerm, 'gi')
         return Object.values(drink)
-            .some((value) => regex.test(value))
+                     .some((value) => regex.test(value))
     };
 
     function handleShowForm() {
@@ -62,18 +63,19 @@ export default function Home() {
     }
 
     const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
-        .filter((drink) => drink.strDrink.toLowerCase().includes(search.toLowerCase()))
-        .filter(ingredientSearch)
+        .filter((drink) => drink.strDrink.toLowerCase().includes(drinkSearch.toLowerCase()))
+        .filter(handleSearchByIngredient)
         .filter((drink) => Object.values(drink).includes(drinkType))
         .map((drink) => <DrinkCard key={drink.id} drinkInfo={drink} />)
 
     return (
         <>
             <Search
-                search={search}
-                ingredient={ingredient}
+                search={drinkSearch}
+                ingredient={ingredientSearch}
                 onIngredSearch={handleIngredientSearch}
-                onSearch={handleSearch} />
+                onSearch={handleDrinkSearch} 
+            />
             <br />
             <Button
                 variant="contained"

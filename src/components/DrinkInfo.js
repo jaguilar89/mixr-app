@@ -8,6 +8,8 @@ export default function DrinkInfo() {
     const ingredients = [];
     const measurements = [];
 
+     /* Because of how the object properties are set up (individual properties of ingredients and not just all in a single array)
+     I had to separate ingredients and measurements into their own arrays in order to work with them. */
     for (let [key, value] of Object.entries(drinkInfo)) {
         if (key.startsWith('strIngredient') && value !== null) {
             ingredients.push(value)
@@ -16,7 +18,8 @@ export default function DrinkInfo() {
             measurements.push(value)
         }
     };
-
+    
+    // List out ingredients and measurements
     const mixingDetails = measurements.map((measurement, index1) =>
         ingredients.map((ingredient, index2) => {
             if (index1 === index2) {
