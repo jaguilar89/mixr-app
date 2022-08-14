@@ -10,12 +10,12 @@ It was bootstrapped using [Create React App](https://create-react-app.dev/). The
 - Netlify
 
 ## Usage
-Search for drinks by name
+Search for drinks by name\
 ![](search-drink.gif)
 
 ### or
 
-Search for drinks by ingredient
+Search for drinks by ingredient\
 ![](search-ingredient.gif)
 
 ## Credits
