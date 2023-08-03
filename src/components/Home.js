@@ -77,12 +77,12 @@ export default function Home() {
                 onSearch={handleDrinkSearch} 
             />
             <br />
-            <Button
+            {/* <Button
                 variant="contained"
                 onClick={handleShowForm}
             >
                 Add a new drink
-            </Button>
+            </Button> */}
             {formIsShown && <AddDrinkForm onButtonClick={handleShowForm} onSubmitForm={handleAddDrink} />}
             <br />
             <Filter
