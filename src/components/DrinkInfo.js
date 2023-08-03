@@ -20,7 +20,7 @@ export default function DrinkInfo() {
     };
     
     // List out ingredients and measurements
-    const mixingDetails = measurements.map((measurement, index1) =>
+    const mixingDetails = measurements.map((measurement, index1) => 
         ingredients.map((ingredient, index2) => {
             if (index1 === index2) {
                 return <li key={ingredient}>{measurement} of {ingredient}</li>
@@ -33,7 +33,7 @@ export default function DrinkInfo() {
             <h1 className="drinkinfo-name">{drinkInfo.strDrink}</h1>
             <div className="drinkinfo-parent">
                 <div className="drinkinfo-img">
-                    <img src={drinkInfo.strDrinkThumb} alt="drink image" />
+                    <img src={drinkInfo.strDrinkThumb} alt="drink info"/>
                 </div>
                 <div className="drinkinfo-instructions">
                     <Stack direction="row" spacing={1}>

@@ -4,7 +4,7 @@ import DrinksContainer from './DrinksContainer';
 import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
-import { Button, LinearProgress } from "@mui/material";
+import { LinearProgress } from "@mui/material";
 import AddDrinkForm from "./AddDrinkForm";
 
 export default function Home() {
