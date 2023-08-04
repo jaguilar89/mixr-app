@@ -15,7 +15,7 @@ export default function App() {
       <Route exact path="/about">
         <About />
       </Route>
-      <Route path="/drinkinfo/:name">
+      <Route path="/drinkinfo/:id">
         <DrinkInfo />
       </Route>
       <Route exact path="/">

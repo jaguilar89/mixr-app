@@ -1,16 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Chip, Stack } from "@mui/material";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function DrinkInfo() {
-    const location = useLocation();
-    const drinkInfo = location.state;
+    const { id } = useParams()
+    const [drinkDetails, setDrinkDetails] = useState([])
     const ingredients = [];
     const measurements = [];
 
+    useEffect(() => {
+        try {
+            (async () => {
+                const res = await fetch(`https://mixr-drink-app.herokuapp.com/drinks/${id}`)
+                if (res.ok) {
+                    const drink = await res.json()
+                    console.log(drink)
+                    setDrinkDetails(drink)
+                }
+            
+            })()
+        } catch (err){
+            console.log(err)
+        }
+    }, []);
+
+    console.log(drinkDetails)
      /* Because of how the object properties are set up (individual properties of ingredients and not just all in a single array)
      I had to separate ingredients and measurements into their own arrays in order to work with them. */
-    for (let [key, value] of Object.entries(drinkInfo)) {
+    for (let [key, value] of Object.entries(drinkDetails)) {
         if (key.startsWith('strIngredient') && value !== null) {
             ingredients.push(value)
         }
@@ -30,23 +48,23 @@ export default function DrinkInfo() {
 
     return (
         <>
-            <h1 className="drinkinfo-name">{drinkInfo.strDrink}</h1>
+            <h1 className="drinkinfo-name">{drinkDetails.strDrink}</h1>
             <div className="drinkinfo-parent">
                 <div className="drinkinfo-img">
-                    <img src={drinkInfo.strDrinkThumb} alt="drink info"/>
+                    <img src={drinkDetails.strDrinkThumb} alt="drink info"/>
                 </div>
                 <div className="drinkinfo-instructions">
                     <Stack direction="row" spacing={1}>
-                        <Chip label={drinkInfo.strCategory} color="primary" />
-                        <Chip label={drinkInfo.strAlcoholic} color="primary"/>
-                        <Chip label={drinkInfo.strGlass} color="primary"/>
+                        <Chip label={drinkDetails.strCategory} color="primary" />
+                        <Chip label={drinkDetails.strAlcoholic} color="primary"/>
+                        <Chip label={drinkDetails.strGlass} color="primary"/>
                     </Stack>
                     <h2>Ingredients</h2>
                     <ul>
                         {mixingDetails}
                     </ul>
                     <h2>Instructions</h2>
-                    <p>{drinkInfo.strInstructions}</p>
+                    <p>{drinkDetails.strInstructions}</p>
                 </div>
             </div>
         </>

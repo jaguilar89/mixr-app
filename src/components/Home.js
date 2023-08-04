@@ -66,7 +66,7 @@ export default function Home() {
         .filter((drink) => drink.strDrink.toLowerCase().includes(drinkSearch.toLowerCase()))
         .filter(handleSearchByIngredient)
         .filter((drink) => Object.values(drink).includes(drinkType))
-        .map((drink) => <DrinkCard key={drink.id} drinkInfo={drink} />)
+        .map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink} />)
 
     return (
         <>
