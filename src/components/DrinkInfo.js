@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
 import { Chip, Stack } from "@mui/material";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 
@@ -23,7 +22,7 @@ export default function DrinkInfo() {
         } catch (err){
             console.log(err)
         }
-    }, []);
+    }, [id]);
 
     console.log(drinkDetails)
      /* Because of how the object properties are set up (individual properties of ingredients and not just all in a single array)
