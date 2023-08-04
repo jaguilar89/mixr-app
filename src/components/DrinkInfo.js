@@ -14,7 +14,6 @@ export default function DrinkInfo() {
                 const res = await fetch(`https://mixr-drink-app.herokuapp.com/drinks/${id}`)
                 if (res.ok) {
                     const drink = await res.json()
-                    console.log(drink)
                     setDrinkDetails(drink)
                 }
             
@@ -24,7 +23,6 @@ export default function DrinkInfo() {
         }
     }, [id]);
 
-    console.log(drinkDetails)
      /* Because of how the object properties are set up (individual properties of ingredients and not just all in a single array)
      I had to separate ingredients and measurements into their own arrays in order to work with them. */
     for (let [key, value] of Object.entries(drinkDetails)) {
