@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 export default function DrinkCard({ drinkInfo }) {
     const { strDrink, strDrinkThumb, id } = drinkInfo
     const history = useHistory()
+
     return (
         <div className="drink-card">
             <div className="drink-thumb">

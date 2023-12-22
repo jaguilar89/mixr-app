@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import useFetch from "../hooks/useFetch";
 import '../App.css';
 import DrinksContainer from './DrinksContainer';
 import DrinkCard from "./DrinkCard";
@@ -7,26 +8,13 @@ import Filter from "./Filter";
 import { LinearProgress } from "@mui/material";
 
 export default function Home() {
-    const [loading, setIsLoading] = useState(true)
-    const [drinks, setDrinks] = useState([]);
+    const { data: drinks, loading, error } = useFetch('https://mixr-drink-app.herokuapp.com/drinks')
     const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
     const [drinkSearch, setDrinkSearch] = useState("");
     const [ingredientSearch, setIngredientSearch] = useState("");
 
-    useEffect(() => {
-        try {
-            (async () => {
-                const res = await fetch('https://mixr-drink-app.herokuapp.com/drinks')
-                const drinkData = await res.json();
-                setDrinks(drinkData)
-                setIsLoading(false)
-            })()
-        } catch (err) {
-            console.log("There was a problem with the fetch request: " + err);
-        }
-    }, [])
-
+    
     function handleDrinkSearch(e) {
         setDrinkSearch(e.target.value)
     };
@@ -51,7 +39,7 @@ export default function Home() {
                      .some((value) => regex.test(value))
     };
 
-    const filteredDrinks = drinks.filter((drink) => {
+    const filteredDrinks = drinks?.filter((drink) => {
         const categoryFilter = filterCategory === "All" || drink.strCategory.includes(filterCategory);
         const searchFilter = drink.strDrink.toLowerCase().includes(drinkSearch);
         const ingredientSearch = handleFilterByIngredient(drink);
@@ -60,7 +48,7 @@ export default function Home() {
         return categoryFilter && searchFilter && ingredientSearch && typeFilter;
     })
 
-    const drinksDisplay = filteredDrinks.map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink}/>)
+    const drinksDisplay = filteredDrinks?.map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink}/>)
 
     return (
         <>
