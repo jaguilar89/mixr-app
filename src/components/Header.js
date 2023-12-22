@@ -9,9 +9,7 @@ export default function Header() {
                 Mixr
                <LocalBarIcon 
                 fontSize="large"
-                sx={{
-                    marginLeft: "0.70rem"
-                    }}
+                sx={{ marginLeft: "0.70rem" }}
                 />
             </h1>
             <NavBar />

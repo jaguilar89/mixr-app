@@ -5,7 +5,6 @@ import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
 import { LinearProgress } from "@mui/material";
-import AddDrinkForm from "./AddDrinkForm";
 
 export default function Home() {
     const [loading, setIsLoading] = useState(true)
@@ -14,7 +13,6 @@ export default function Home() {
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
     const [drinkSearch, setDrinkSearch] = useState("");
     const [ingredientSearch, setIngredientSearch] = useState("");
-    const [formIsShown, setFormIsShown] = useState(false);
 
     useEffect(() => {
         try {
@@ -23,7 +21,6 @@ export default function Home() {
                 const drinkData = await res.json();
                 setDrinks(drinkData)
                 setIsLoading(false)
-                document.body.style.backgroundColor = "#1b3b79" //changes body color
             })()
         } catch (err) {
             console.log("There was a problem with the fetch request: " + err);
@@ -47,26 +44,23 @@ export default function Home() {
     };
 
     // Search drink objects for any instance of the search term using regex
-    function handleSearchByIngredient(drink) {
+    function handleFilterByIngredient(drink) {
         const searchTerm = ingredientSearch
         const regex = new RegExp(searchTerm, 'gi')
         return Object.values(drink)
                      .some((value) => regex.test(value))
     };
 
-    function handleShowForm() {
-        setFormIsShown((formIsShown) => !formIsShown)
-    };
+    const filteredDrinks = drinks.filter((drink) => {
+        const categoryFilter = filterCategory === "All" || drink.strCategory.includes(filterCategory);
+        const searchFilter = drink.strDrink.toLowerCase().includes(drinkSearch);
+        const ingredientSearch = handleFilterByIngredient(drink);
+        const typeFilter = Object.values(drink).includes(drinkType);
 
-    function handleAddDrink(newDrink) {
-        setDrinks([...drinks, newDrink])
-    }
+        return categoryFilter && searchFilter && ingredientSearch && typeFilter;
+    })
 
-    const drinksDisplay = drinks.filter((drink) => filterCategory === "All" ? true : drink.strCategory.includes(filterCategory))
-        .filter((drink) => drink.strDrink.toLowerCase().includes(drinkSearch.toLowerCase()))
-        .filter(handleSearchByIngredient)
-        .filter((drink) => Object.values(drink).includes(drinkType))
-        .map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink} />)
+    const drinksDisplay = filteredDrinks.map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink}/>)
 
     return (
         <>
@@ -76,14 +70,6 @@ export default function Home() {
                 onIngredSearch={handleIngredientSearch}
                 onSearch={handleDrinkSearch} 
             />
-            <br />
-            {/* <Button
-                variant="contained"
-                onClick={handleShowForm}
-            >
-                Add a new drink
-            </Button> */}
-            {formIsShown && <AddDrinkForm onButtonClick={handleShowForm} onSubmitForm={handleAddDrink} />}
             <br />
             <Filter
                 onCategoryChange={handleCategoryChange}

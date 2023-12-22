@@ -5,8 +5,6 @@ import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 export default function DrinkInfo() {
     const { id } = useParams()
     const [drinkDetails, setDrinkDetails] = useState([])
-    const ingredients = [];
-    const measurements = [];
 
     useEffect(() => {
         try {
@@ -23,25 +21,19 @@ export default function DrinkInfo() {
         }
     }, [id]);
 
-     /* Because of how the object properties are set up (individual properties of ingredients and not just all in a single array)
-     I had to separate ingredients and measurements into their own arrays in order to work with them. */
-    for (let [key, value] of Object.entries(drinkDetails)) {
-        if (key.startsWith('strIngredient') && value !== null) {
-            ingredients.push(value)
+    // creates an array with a fixed length of 15, ingredients and measurements are separated into their own properties and
+    // there are 15 available properties for each
+    const mixingDetails = Array.from({ length: 15}, (_, index) => {
+        const ingredient = drinkDetails[`strIngredient${index + 1}`]
+        const measurement = drinkDetails[`strMeasure${index + 1}`]
+
+        // Check if ingredient exists
+        if (ingredient) {
+            const pair = measurement ? `${measurement} of ${ingredient}` : ingredient
+            return <li key={ingredient}> {pair} </li>
         }
-        if (key.startsWith('strMeasure') && value !== null) {
-            measurements.push(value)
-        }
-    };
-    
-    // List out ingredients and measurements
-    const mixingDetails = measurements.map((measurement, index1) => 
-        ingredients.map((ingredient, index2) => {
-            if (index1 === index2) {
-                return <li key={ingredient}>{measurement} of {ingredient}</li>
-            }
-        })
-    )
+        return null; // return null if missing ingredient
+    })
 
     return (
         <>
