@@ -12,7 +12,7 @@ export default function App() {
     <div className="App">
       <Header />
       <Switch>
-      <Route exact path="/about">
+      <Route path="/about">
         <About />
       </Route>
       <Route path="/drinkinfo/:id">

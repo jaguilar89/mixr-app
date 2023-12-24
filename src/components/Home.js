@@ -35,20 +35,21 @@ export default function Home() {
     function handleFilterByIngredient(drink) {
         const searchTerm = ingredientSearch
         const regex = new RegExp(searchTerm, 'gi')
-        return Object.values(drink)
-                     .some((value) => regex.test(value))
+        return Object.values(drink).some((value) => regex.test(value))
     };
 
     const filteredDrinks = drinks?.filter((drink) => {
         const categoryFilter = filterCategory === "All" || drink.strCategory.includes(filterCategory);
         const searchFilter = drink.strDrink.toLowerCase().includes(drinkSearch);
-        const ingredientSearch = handleFilterByIngredient(drink);
-        const typeFilter = Object.values(drink).includes(drinkType);
+        const ingredientSearch = handleFilterByIngredient(drink)
+        const typeFilter = Object.values(drink).includes(drinkType)
 
-        return categoryFilter && searchFilter && ingredientSearch && typeFilter;
+        return categoryFilter && searchFilter && ingredientSearch && typeFilter
     })
 
-    const drinksDisplay = filteredDrinks?.map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink}/>)
+    const sortedDrinks = filteredDrinks?.sort((a, b) => a.strDrink.localeCompare(b.strDrink))
+
+    const drinksDisplay = sortedDrinks?.map((drink) => <DrinkCard key={drink.strDrink} drinkInfo={drink}/>)
 
     return (
         <>
