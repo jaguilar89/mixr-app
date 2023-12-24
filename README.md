@@ -2,6 +2,8 @@
 [Mixr](https://mixr-app.netlify.app/) is an app that lets you search for drink recipes(or add your own), from a crowdsourced list of over 600 cocktails and mixed drinks.\
 It was bootstrapped using [Create React App](https://create-react-app.dev/). The data set utilized was acquired from [The Cocktail DB](https://www.thecocktaildb.com/)
 
+### Note: This app was created using an open and crowdsourced database. Incomplete recipes and spelling/grammatical errors may be found.
+
 ## Technologies
 - React 18.2
 - React Router v5
@@ -21,3 +23,7 @@ Search for drinks by ingredient\
 ## Credits
 - [The Cocktail DB](https://www.thecocktaildb.com/) for the API
 - [Samuel Banya](https://github.com/samuelbanya) for the cool app name
+
+---
+## Future Improvements
+- [ ] Implement pagination
