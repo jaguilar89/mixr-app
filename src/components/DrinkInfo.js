@@ -2,6 +2,7 @@ import React from "react";
 import { Chip, LinearProgress, Stack } from "@mui/material";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../hooks/useFetch";
+import ErrorPage from "./ErrorPage";
 
 export default function DrinkInfo() {
     const { id } = useParams()
@@ -22,6 +23,7 @@ export default function DrinkInfo() {
     })
 
     if (loading) return <LinearProgress />
+    if (error) return <ErrorPage />
     return (
         <>
             <h1 className="drinkinfo-name">{drinkInfo?.strDrink}</h1>

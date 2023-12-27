@@ -6,9 +6,10 @@ import DrinkCard from "./DrinkCard";
 import Search from "./Search";
 import Filter from "./Filter";
 import { LinearProgress } from "@mui/material";
+import ErrorPage from "./ErrorPage";
 
 export default function Home() {
-    const { data: drinks, loading, error } = useFetch('https://mixr-drink-app.herokuapp.com/drinks')
+    const { data: drinks, loading, error } = useFetch(`https://mixr-drink-app.herokuapp.com/drinks/`)
     const [filterCategory, setFilterCategory] = useState("All");
     const [drinkType, setDrinkType] = useState(null); // Filter alcoholic vs non-alcoholic
     const [drinkSearch, setDrinkSearch] = useState("");
@@ -67,6 +68,7 @@ export default function Home() {
             <br />
 
             {loading ? <LinearProgress /> : <DrinksContainer drinks={drinksDisplay} />}
+            {error && <ErrorPage error={error}/>}
         </>
     )
 };

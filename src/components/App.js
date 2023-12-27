@@ -5,6 +5,7 @@ import Header from './Header';
 import Home from './Home';
 import About from './About';
 import DrinkInfo from './DrinkInfo';
+import ErrorPage from './ErrorPage';
 
 export default function App() {
 

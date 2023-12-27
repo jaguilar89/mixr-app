@@ -8,7 +8,7 @@ export default function About() {
         <>
             <h1>About</h1>
             <p>
-                Mixr is an app that lets you search for drink recipes(or add your own), from a crowdsourced list of over 600 cocktails and mixed drinks.
+                Mixr is an app that lets you search for drink recipes from a crowdsourced list of over 600 cocktails and mixed drinks.
                 <br/>
                 It is written in React (18.2) and utilizes React Router (v5) and Material UI.
             </p>
